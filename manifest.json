@@ -1,0 +1,15 @@
+{
+  "name": "Grade 6 Math Test",
+  "short_name": "Math Quiz",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4db6ac",
+  "icons": [
+    {
+      "src": "character.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
