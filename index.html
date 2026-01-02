@@ -3,147 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 6 Math Proficiency Test</title>
+    <title>Grade 6 Math Test</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4db6ac">
     <style>
         :root { --primary: #4db6ac; --secondary: #ff5722; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); margin: 0; padding: 10px; }
-        .container { max-width: 850px; margin: 0 auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; min-height: 400px; }
         .hidden { display: none; }
-        .admin-access { position: absolute; top: 10px; right: 10px; opacity: 0.3; cursor: pointer; font-size: 12px; font-weight: bold; }
-        .owl-box { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; justify-content: center; }
-        .owl-img { width: 100px; height: auto; }
-        .bubble { background: #fff; border: 3px solid var(--primary); padding: 15px; border-radius: 15px; flex: 1; font-weight: bold; color: #00796b; }
-        .header-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #e0f2f1; padding: 15px; border-radius: 10px; border: 2px solid var(--primary); }
-        #timer { font-size: 26px; font-weight: bold; color: #d32f2f; font-family: monospace; }
-        .car-track { width: 100%; height: 8px; background: #ccc; border-radius: 5px; position: relative; margin-left: 20px; flex-grow: 1; }
-        #car { position: absolute; top: -25px; left: 0; font-size: 25px; transition: 0.5s; }
-        .option { display: block; background: #fff; border: 2px solid #b2dfdb; padding: 14px; margin: 8px 0; border-radius: 10px; cursor: pointer; text-align: left; }
-        .option.selected { background: var(--primary); color: white; border-color: #00796b; font-weight: bold; }
-        .q-img { max-width: 100%; height: auto; margin: 10px 0; border-radius: 10px; }
-        .nav-btns { display: flex; justify-content: space-between; margin-top: 25px; }
-        button { padding: 14px 30px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        .owl-img { width: 120px; height: auto; display: block; margin: 0 auto 15px; }
+        .bubble { background: #fff; border: 3px solid var(--primary); padding: 15px; border-radius: 15px; text-align: center; font-weight: bold; color: #00796b; margin-bottom: 20px; }
+        .header-info { display: flex; justify-content: space-between; align-items: center; background: #e0f2f1; padding: 15px; border-radius: 10px; border: 2px solid var(--primary); margin-bottom: 20px; }
+        #timer { font-size: 24px; font-weight: bold; color: #d32f2f; }
+        .option { display: block; background: #fff; border: 2px solid #b2dfdb; padding: 12px; margin: 8px 0; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        .option.selected { background: var(--primary); color: white; }
+        .q-img { max-width: 100%; height: auto; border-radius: 10px; margin: 10px 0; }
+        button { padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        .btn-start { background: var(--secondary); color: white; width: 100%; }
         .btn-next { background: var(--primary); color: white; }
-        .btn-start { background: var(--secondary); color: white; width: 100%; font-size: 20px; }
-        .dashboard-container { overflow-x: auto; margin-top: 15px; }
-        table { width: 100%; border-collapse: collapse; min-width: 900px; font-size: 11px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background: var(--primary); color: white; }
+        .review-box { border: 1px solid #ddd; padding: 10px; margin: 5px 0; border-radius: 8px; text-align: left; }
+        .correct { color: green; font-weight: bold; }
+        .wrong { color: red; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="admin-access" onclick="adminLogin()">Teacher Access 🔒</div>
-
     <div id="page-start">
-        <div class="owl-box">
-            <img src="character.png" class="owl-img">
-            <div class="bubble">Hello, Grade 6 Student! I am your Math Buddy. Are you ready?</div>
-        </div>
-        <button class="btn-start" onclick="showRegistration()">START TEST</button>
+        <img src="character.png" class="owl-img">
+        <div class="bubble">Welcome! I am Teacher Owl. Let's test your Math skills!</div>
+        <button class="btn-start" onclick="showPage('page-reg')">START</button>
     </div>
 
     <div id="page-reg" class="hidden">
-        <h2 style="color: var(--primary);">Student Information</h2>
-        <input type="text" id="studentName" placeholder="Full Name" style="width:95%; padding:12px; margin-bottom:10px; border-radius:8px; border:2px solid #ddd;">
-        <input type="text" id="studentSchool" placeholder="School" style="width:95%; padding:12px; margin-bottom:10px; border-radius:8px; border:2px solid #ddd;">
+        <img src="character.png" style="width: 60px; float: right;">
+        <h2 style="color: var(--primary);">Mathematics - Grade 6</h2>
+        <p>Please enter your details to proceed:</p>
+        <input type="text" id="studentName" placeholder="Full Name" style="width:90%; padding:12px; margin-bottom:10px; border-radius:8px; border:2px solid #ddd;">
+        <input type="text" id="studentSchool" placeholder="School Name" style="width:90%; padding:12px; margin-bottom:10px; border-radius:8px; border:2px solid #ddd;">
         <button class="btn-start" onclick="startTest()">PROCEED TO EXAM</button>
     </div>
 
     <div id="page-quiz" class="hidden">
         <div class="header-info">
             <div id="timer">40:00</div>
-            <div class="car-track"><div id="car">🚗</div></div>
+            <img src="character.png" style="width: 40px;">
         </div>
         <div id="quiz-content">
-            <h3 id="q-title" style="text-align: left;"></h3>
+            <h3 id="q-title"></h3>
             <div id="q-image-container"></div>
             <div id="options-container"></div>
         </div>
-        <div class="nav-btns">
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
             <button onclick="prevQuestion()" id="btnBack" style="background:#9e9e9e; color:white;">BACK</button>
             <button onclick="nextQuestion()" id="btnNext" class="btn-next">NEXT</button>
         </div>
     </div>
 
-    <div id="page-admin" class="hidden">
-        <h2 style="color: var(--secondary);">Teacher Dashboard</h2>
-        <button onclick="syncToCloud()" style="background:#2ecc71; color:white; width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:none; font-weight:bold;">☁️ Sync to Google Sheets</button>
-        <div class="dashboard-container">
-            <table id="resultsTable">
-                <thead><tr id="tableHeader"></tr></thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-        </div>
-        <button onclick="location.reload()" style="margin-top:20px; padding:10px; border-radius:20px; border:none;">Exit Dashboard</button>
+    <div id="page-results" class="hidden">
+        <img src="character.png" class="owl-img">
+        <h2 id="final-score-text"></h2>
+        <div id="review-container" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;"></div>
+        <button class="btn-start" onclick="location.reload()">FINISH</button>
     </div>
 </div>
 
 <script>
-    // PALITAN MO ITO NG IYONG GOOGLE SCRIPT URL
-    const CLOUD_URL = "https://script.google.com/macros/s/AKfycbz2LX70TXDsjd_r7spB8fGvlMQ8fthtJ3WnUSzvf1IJpJDY0bGyekkJJ1UKJi7fIDsv/exec";
-
+    const CLOUD_URL = "PALITAN_NG_IYONG_SCRIPT_URL";
     const questions = [
         { q: "How will you describe a rectangular prism?", options: ["It has one face but no edges or vertices.", "It has two circular faces but has no edges or vertices.", "It has three pairs of congruent parallel faces.", "It has one base and at least three triangular faces."], answer: 2, img: "q1.png" },
         { q: "How will you visualize a sphere?", options: ["I and II", "II and III", "III and IV", "I and IV"], answer: 3, img: "q2.png" },
-        { q: "How will you differentiate solid figures from plane figures?", options: ["Solid figures have three dimensions while plane figures have two dimensions.", "Plane figures have three dimensions while solid figures have two dimensions.", "Solid figures have three dimensions, the width, length and height or depth while plane figures have two dimensions, the width, and the length.", "Plane figures have three dimensions, the width, length and height or depth while solid figures have two dimensions, the width, and the length."], answer: 2, img: null },
-        { q: "You will differentiate solid figures from plane figures by giving examples of each. Which of the following is correct?", options: ["Sphere, Cone, and Pyramid are solid figures while Circle, Triangle and Square are plane figures.", "Circle, Triangle and Square are solid figures while Sphere, Cone, and Pyramid are plane figures.", "Solid figures have only length and width while plane figures have height and depth.", "Plane figures have width, length and height while solid figures have width and length."], answer: 0, img: null },
-        { q: "What rule should be formulated to find the next term in the sequence: 86, 81, 76, 71, 66?", options: ["Subtract 5 from the term before it.", "Add 5 from the term before it.", "Subtract 5 from the term after it.", "Add 5 from the term after it."], answer: 0, img: null },
-        { q: "Which of the following are the faces of a rectangular prism from the given nets?", options: ["Choice A", "Choice B", "Choice C", "Choice D"], answer: 1, img: "q6.png" },
-        { q: "Which of the following is the net of a square pyramid?", options: ["Choice A", "Choice B", "Choice C", "Choice D"], answer: 0, img: "q7.png" },
-        { q: "Formulate a rule to find the next term in the sequence: 2, 6, 18, 54, ...", options: ["Divide 3 to the term before it.", "Multiply 3 to the term before it.", "Subtract 3 to the term before it.", "Add 3 to the term before it."], answer: 1, img: null },
-        { q: "What rule must be formulated to find the 6th and the succeeding terms of the sequence below?", options: ["Subtract 2 from the product of 5 and the sequence number ( n ) to find the value of the 6th and the succeeding terms (5n – 2).", "Multiply 5 to the sequence number ( n ) to find the value of the 6th and the succeeding terms (5n).", "Subtract 5 from the product of 2 and the sequence number ( n ) to find the value of the 6th and the succeeding terms (2n – 5).", "Add 2 from the product of 5 and the sequence number ( n ) to find the value of the 6th and the succeeding terms (5n + 2)."], answer: 0, img: "q9.png" },
-        { q: "Study the sequence below. What rule will you formulate to find the 6th term of the sequence?", options: ["Subtract 8 from the product of 3 and the sequence number ( n ) to find the value of the 6th term (3n – 8).", "Add 8 to the product of 3 and the sequence number ( n ) to find the value of the 6th term (3n + 8).", "Add 5 to the product of 3 and the sequence number ( n ) to find the value of the 6th term (3n + 5).", "Subtract 5 from the product of 3 and the sequence number ( n ) to find the value of the 6th term (3n – 5)."], answer: 1, img: "q10.png" }
+        { q: "How will you differentiate solid figures from plane figures?", options: ["Solid figures have three dimensions while plane figures have two dimensions.", "Plane figures have three dimensions while solid figures have two dimensions.", "Solid figures have dimensions: width, length and height while plane figures have width and length.", "Plane figures have width, length and height while solid figures have width and length."], answer: 2, img: null },
+        { q: "What rule should be formulated to find the next term in the sequence: 86, 81, 76, 71, 66?", options: ["Subtract 5", "Add 5", "Multiply 5", "Divide 5"], answer: 0, img: null },
+        { q: "Which of the following are the faces of a rectangular prism?", options: ["Net A", "Net B", "Net C", "Net D"], answer: 1, img: "q6.png" },
+        { q: "Which is the net of a square pyramid?", options: ["Net A", "Net B", "Net C", "Net D"], answer: 0, img: "q7.png" },
+        { q: "Rule for sequence: 2, 6, 18, 54, ...", options: ["Divide by 3", "Multiply by 3", "Subtract 3", "Add 3"], answer: 1, img: null },
+        { q: "Rule for sequence: 3, 8, 13, 18, 23...", options: ["5n - 2", "5n", "2n - 5", "5n + 2"], answer: 0, img: "q9.png" },
+        { q: "Rule for sequence: 11, 14, 17, 20, 23...", options: ["3n - 8", "3n + 8", "3n + 5", "3n - 5"], answer: 1, img: "q10.png" }
     ];
 
-    let currentIdx = 0, studentAnswers = new Array(10).fill(null), timeLeft = 40 * 60, timerInterval;
+    let currentIdx = 0, studentAnswers = new Array(questions.length).fill(null), timeLeft = 40 * 60, timerInterval;
 
-    function adminLogin() { if(prompt("Teacher PIN:") === "1234") { document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden')); document.getElementById('page-admin').classList.remove('hidden'); buildDashboard(); } }
-    function showRegistration() { document.getElementById('page-start').classList.add('hidden'); document.getElementById('page-reg').classList.remove('hidden'); }
-    function startTest() { if(!document.getElementById('studentName').value) return alert("Name required!"); document.getElementById('page-reg').classList.add('hidden'); document.getElementById('page-quiz').classList.remove('hidden'); startTimer(); renderQuestion(); }
-    function startTimer() { timerInterval = setInterval(() => { timeLeft--; let mins = Math.floor(timeLeft/60), secs = timeLeft%60; document.getElementById('timer').innerText = `${mins}:${secs<10?'0':''}${secs}`; if(timeLeft<=0) endTest(); }, 1000); }
-    function renderQuestion() { 
-        const q = questions[currentIdx]; 
-        document.getElementById('q-title').innerText = `${currentIdx+1}. ${q.q}`;
+    function showPage(id) {
+        document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden'));
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function startTest() {
+        if(!document.getElementById('studentName').value) return alert("Please enter your name!");
+        showPage('page-quiz');
+        startTimer();
+        renderQuestion();
+    }
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            let mins = Math.floor(timeLeft/60), secs = timeLeft%60;
+            document.getElementById('timer').innerText = `${mins}:${secs<10?'0':''}${secs}`;
+            if(timeLeft<=0) endTest();
+        }, 1000);
+    }
+
+    function renderQuestion() {
+        const q = questions[currentIdx];
+        document.getElementById('q-title').innerText = `${currentIdx + 1}. ${q.q}`;
         document.getElementById('q-image-container').innerHTML = q.img ? `<img src="${q.img}" class="q-img">` : "";
         const optCont = document.getElementById('options-container'); optCont.innerHTML = "";
         q.options.forEach((opt, i) => {
-            const div = document.createElement('div'); div.className = `option ${studentAnswers[currentIdx]===i?'selected':''}`;
+            const div = document.createElement('div');
+            div.className = `option ${studentAnswers[currentIdx] === i ? 'selected' : ''}`;
             div.innerText = `${String.fromCharCode(65+i)}. ${opt}`;
-            div.onclick = () => { studentAnswers[currentIdx]=i; renderQuestion(); }; optCont.appendChild(div);
+            div.onclick = () => { studentAnswers[currentIdx] = i; renderQuestion(); };
+            optCont.appendChild(div);
         });
-        document.getElementById('car').style.left = `${(currentIdx/9)*95}%`;
-        document.getElementById('btnBack').style.visibility = currentIdx===0?'hidden':'visible';
-        document.getElementById('btnNext').innerText = currentIdx===9?'SUBMIT':'NEXT';
-    }
-    function nextQuestion() { if(currentIdx<9) { currentIdx++; renderQuestion(); } else { if(confirm("Submit?")) endTest(); } }
-    function prevQuestion() { if(currentIdx>0) { currentIdx--; renderQuestion(); } }
-    function endTest() { clearInterval(timerInterval); saveLocal(); alert("Submitted!"); location.reload(); }
-    function saveLocal() {
-        const name = document.getElementById('studentName').value, school = document.getElementById('studentSchool').value, dateTime = new Date().toLocaleString();
-        let score = 0, details = questions.map((q,i) => { const ok = studentAnswers[i]===q.answer; if(ok) score++; return ok?"CHECK":"EKIS"; });
-        let history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        history.push({ name, school, dateTime, score, details }); localStorage.setItem('math_quiz_history', JSON.stringify(history));
-    }
-    function buildDashboard() {
-        const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        document.getElementById('tableHeader').innerHTML = `<th>Date</th><th>Name</th>` + questions.map((_,i)=>`<th>Q${i+1}</th>`).join('') + `<th>Score</th>`;
-        document.getElementById('tableBody').innerHTML = history.map(d => `<tr><td>${d.dateTime}</td><td>${d.name}</td>${d.details.map(det=>`<td>${det==='CHECK'?'✔️':'❌'}</td>`).join('')}<td>${d.score}/10</td></tr>`).join('');
-    }
-    async function syncToCloud() {
-        const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        if(!history.length) return alert("No data");
-        for(let d of history) { await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) }); }
-        alert("Sync Complete!");
+        document.getElementById('btnBack').style.visibility = currentIdx === 0 ? 'hidden' : 'visible';
+        document.getElementById('btnNext').innerText = currentIdx === questions.length - 1 ? 'FINISH' : 'NEXT';
     }
 
-    // SERVICE WORKER REGISTRATION
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').then(() => console.log('Offline Ready'));
+    function nextQuestion() {
+        if (studentAnswers[currentIdx] === null) return alert("Teacher Owl says: Please select an answer first! 🦉");
+        if (currentIdx < questions.length - 1) { currentIdx++; renderQuestion(); } 
+        else { if(confirm("Are you sure you want to submit?")) endTest(); }
+    }
+
+    function prevQuestion() { if(currentIdx > 0) { currentIdx--; renderQuestion(); } }
+
+    function endTest() {
+        clearInterval(timerInterval);
+        let score = 0;
+        let reviewHtml = "";
+        questions.forEach((q, i) => {
+            const isCorrect = studentAnswers[i] === q.answer;
+            if(isCorrect) score++;
+            reviewHtml += `<div class="review-box">
+                <b>No. ${i+1}:</b> ${isCorrect ? '<span class="correct">✔️ Tama</span>' : '<span class="wrong">❌ Mali</span>'}<br>
+                Correct Answer: ${q.options[q.answer]}
+            </div>`;
         });
+
+        document.getElementById('final-score-text').innerText = `You scored ${score} / ${questions.length}`;
+        document.getElementById('review-container').innerHTML = reviewHtml;
+        
+        // Save Local
+        const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
+        history.push({ 
+            name: document.getElementById('studentName').value, 
+            school: document.getElementById('studentSchool').value,
+            dateTime: new Date().toLocaleString(),
+            score: score,
+            details: studentAnswers.map((ans, i) => ans === questions[i].answer ? "CHECK" : "EKIS")
+        });
+        localStorage.setItem('math_quiz_history', JSON.stringify(history));
+        
+        showPage('page-results');
+    }
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js'); });
     }
 </script>
 </body>
