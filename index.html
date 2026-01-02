@@ -9,13 +9,15 @@
     <style>
         :root { --primary: #4db6ac; --secondary: #ff5722; --bg: #f4f7f6; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); margin: 0; padding: 10px; }
-        .container { max-width: 900px; margin: 0 auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; min-height: 500px; }
+        .container { max-width: 950px; margin: 0 auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; min-height: 500px; }
         .hidden { display: none; }
         
+        /* Owl Motivation */
         .owl-motivation { display: flex; align-items: center; gap: 15px; margin-bottom: 5px; justify-content: center; }
         .owl-mini { width: 85px; height: auto; }
         .bubble { background: #fff; border: 3px solid var(--primary); padding: 12px; border-radius: 15px; flex: 1; font-weight: bold; color: #00796b; font-size: 14px; position: relative; text-align: center; }
 
+        /* Car Slider */
         .car-track { width: 100%; height: 8px; background: #e0e0e0; border-radius: 5px; position: relative; margin: 25px 0 20px 0; border: 1px solid #ccc; }
         #car { position: absolute; top: -22px; left: 0; font-size: 22px; transition: 0.5s ease-in-out; }
 
@@ -28,16 +30,16 @@
         .q-img { max-width: 100%; height: auto; border-radius: 10px; margin: 10px 0; border: 1px solid #ddd; display: block; margin-left: auto; margin-right: auto; }
         
         button { padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 16px; }
-        .btn-start { background: var(--secondary); color: white; width: 100%; font-size: 20px; }
+        .btn-start { background: var(--secondary); color: white; width: 100%; font-size: 20px; margin-top: 10px; }
         .btn-next { background: var(--primary); color: white; }
-        .admin-access { position: absolute; top: 10px; right: 15px; opacity: 0.5; font-size: 12px; cursor: pointer; font-weight: bold; }
+        .admin-access { position: absolute; top: 10px; right: 15px; opacity: 0.5; font-size: 12px; cursor: pointer; font-weight: bold; color: #777; }
         
-        /* Dashboard Styles */
-        .dashboard-container { overflow-x: auto; margin-top: 15px; }
-        table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 800px; }
-        th, td { border: 1px solid #ddd; padding: 6px; text-align: center; }
-        th { background: var(--primary); color: white; position: sticky; top: 0; }
-        .btn-csv { background: #3498db; color: white; padding: 10px 20px; border-radius: 5px; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 8px; }
+        /* Dashboard & Table */
+        .dashboard-container { overflow-x: auto; margin-top: 15px; background: #fff; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 900px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background: var(--primary); color: white; }
+        .review-box { border: 1px solid #ddd; padding: 10px; margin: 5px 0; border-radius: 8px; text-align: left; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -47,7 +49,7 @@
 
     <div id="page-start" style="text-align: center;">
         <img src="character.png" style="width: 150px; margin-bottom: 15px;">
-        <div class="bubble">Hello, Grade 6 Student! I am your Math Buddy. Are you ready?</div>
+        <div class="bubble" style="margin-bottom: 20px;">Hello, Grade 6 Student! I am your Math Buddy. Are you ready?</div>
         <button class="btn-start" onclick="showRegistration()">START TEST</button>
     </div>
 
@@ -55,19 +57,16 @@
         <div style="text-align: left; background: #e0f2f1; padding: 15px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px;">
             <img src="character.png" style="width: 60px; float: right;">
             <h2 style="color: var(--primary); margin: 0;">Mathematics - Grade 6</h2>
-            <p style="margin: 5px 0; font-weight: bold; color: #555;">Teacher's Offline Assessment Tool</p>
+            <p style="margin: 5px 0; font-weight: bold; color: #555;">Teacher's Assessment Tool</p>
         </div>
-        <input type="text" id="studentName" placeholder="Full Name (Pangalan)" style="width:95%; padding:14px; margin-bottom:10px; border-radius:8px; border:2px solid #ddd;">
-        <input type="text" id="studentSchool" placeholder="School Name (Paaralan)" style="width:95%; padding:14px; margin-bottom:15px; border-radius:8px; border:2px solid #ddd;">
+        <input type="text" id="studentName" placeholder="Full Name (Pangalan)" style="width:95%; padding:14px; margin-bottom:10px; border-radius:8px; border:2px solid #ddd; font-size:16px;">
+        <input type="text" id="studentSchool" placeholder="School Name (Paaralan)" style="width:95%; padding:14px; margin-bottom:15px; border-radius:8px; border:2px solid #ddd; font-size:16px;">
         <button class="btn-start" onclick="startTest()">PROCEED TO EXAM</button>
     </div>
 
     <div id="page-quiz" class="hidden">
-        <div class="header-info"><div id="timer">40:00</div><div style="font-weight: bold;">Math Quiz</div></div>
-        <div class="owl-motivation">
-            <img src="character.png" class="owl-mini">
-            <div class="bubble" id="owl-message">Keep it up! 🦉</div>
-        </div>
+        <div class="header-info"><div id="timer">40:00</div><div style="font-weight: bold; color: var(--primary);">Quiz Mode</div></div>
+        <div class="owl-motivation"><img src="character.png" class="owl-mini"><div class="bubble" id="owl-message">Good luck! 🦉</div></div>
         <div class="car-track"><div id="car">🚗</div></div>
         <div id="quiz-content" style="text-align: left;"><h3 id="q-title"></h3><div id="q-image-container"></div><div id="options-container"></div></div>
         <div style="display: flex; justify-content: space-between; margin-top: 25px;"><button onclick="prevQuestion()" id="btnBack" style="background:#9e9e9e; color:white;">BACK</button><button onclick="nextQuestion()" id="btnNext" class="btn-next">NEXT</button></div>
@@ -79,24 +78,31 @@
 
     <div id="page-admin" class="hidden">
         <h2 style="color: var(--secondary); text-align: center;">Teacher Dashboard</h2>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
             <button onclick="syncToCloud()" style="background:#2ecc71; color:white; flex: 1;">☁️ Sync to Google Sheets</button>
-            <button onclick="downloadCSV()" class="btn-csv">📥 Download CSV (Excel)</button>
+            <button onclick="downloadCSV()" style="background:#3498db; color:white; flex: 1;">📥 Download CSV (Excel)</button>
         </div>
         <div class="dashboard-container">
             <table id="adminTable">
                 <thead>
-                    <tr><th>Name</th><th>School</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th><th>Score</th></tr>
+                    <tr>
+                        <th>Name</th><th>School</th>
+                        <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th>
+                        <th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th>
+                        <th>Total</th><th>Date</th>
+                    </tr>
                 </thead>
                 <tbody id="adminTbody"></tbody>
             </table>
         </div>
-        <button onclick="location.reload()" style="margin-top:20px; background:#ddd; width: 100%;">Back to Start</button>
+        <button onclick="location.reload()" style="margin-top:20px; background:#ddd; width: 100%;">Back to Start Screen</button>
     </div>
 </div>
 
 <script>
+    // ILAGAY DITO ANG IYONG GOOGLE SCRIPT URL
     const CLOUD_URL = "https://script.google.com/macros/s/AKfycbz2LX70TXDsjd_r7spB8fGvlMQ8fthtJ3WnUSzvf1IJpJDY0bGyekkJJ1UKJi7fIDsv/exec"; 
+
     const owlMessages = ["Let's start! 🦉", "Keep going! ✨", "Think carefully! 🧠", "Halfway there! 💪", "Amazing! 🌟", "Just a few more! 🚀", "You're a wizard! 🧙‍♂️", "Focus! 🎯", "Almost done! 🏆", "Last one! 🎉"];
     const questions = [
         { q: "How will you describe a rectangular prism?", options: ["It has one face but no edges or vertices.", "It has two circular faces but has no edges or vertices.", "It has three pairs of congruent parallel faces.", "It has one base and at least three triangular faces."], answer: 2, img: "q1.png" },
@@ -124,7 +130,7 @@
         clearInterval(timerInterval);
         let score = 0, reviewHtml = "";
         const detailedAnswers = studentAnswers.map((ans, i) => ans === questions[i].answer ? "✔️" : "❌");
-        detailedAnswers.forEach((sym, i) => { if(sym === "✔️") score++; reviewHtml += `<div class="review-box"><b>No. ${i+1}:</b> ${sym === "✔️" ? '<span class="correct">✔️ Tama</span>' : '<span class="wrong">❌ Mali</span>'}<br>Ans: ${questions[i].options[questions[i].answer]}</div>`; });
+        detailedAnswers.forEach((sym, i) => { if(sym === "✔️") score++; reviewHtml += `<div class="review-box"><b>No. ${i+1}:</b> ${sym === "✔️" ? '✔️ Tama' : '❌ Mali'}<br>Ans: ${questions[i].options[questions[i].answer]}</div>`; });
         
         let history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
         history.push({ name: document.getElementById('studentName').value, school: document.getElementById('studentSchool').value, score: `${score}/10`, dateTime: new Date().toLocaleString(), details: detailedAnswers });
@@ -138,18 +144,23 @@
         if(prompt("Teacher PIN:") === "1234") {
             document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden')); document.getElementById('page-admin').classList.remove('hidden');
             const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-            document.getElementById('adminTbody').innerHTML = history.map(h => `<tr><td>${h.name}</td><td>${h.school}</td>${h.details.map(d => `<td>${d}</td>`).join('')}<td>${h.score}</td></tr>`).join('');
+            document.getElementById('adminTbody').innerHTML = history.map(h => `
+                <tr>
+                    <td>${h.name}</td><td>${h.school}</td>
+                    ${h.details.map(d => `<td>${d}</td>`).join('')}
+                    <td style="font-weight:bold;">${h.score}</td><td>${h.dateTime}</td>
+                </tr>`).join('');
         }
     }
 
     function downloadCSV() {
         const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        if(history.length === 0) return alert("No data yet.");
+        if(history.length === 0) return alert("Walang data para i-download.");
         let csv = "Name,School,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Score,Date\n";
-        history.forEach(h => { csv += `${h.name},${h.school},${h.details.join(',')},${h.score},${h.dateTime}\n`; });
-        const blob = new Blob([csv], { type: 'text/csv' });
+        history.forEach(h => { csv += `"${h.name}","${h.school}",${h.details.join(',')},"${h.score}","${h.dateTime}"\n`; });
+        const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a'); a.setAttribute('hidden', ''); a.setAttribute('href', url); a.setAttribute('download', 'quiz_results.csv');
+        const a = document.createElement('a'); a.setAttribute('hidden', ''); a.setAttribute('href', url); a.setAttribute('download', 'Grade6_Math_Results.csv');
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
 
