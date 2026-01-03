@@ -32,8 +32,8 @@
         .option.selected { background: var(--primary); color: white; font-weight: bold; }
         .q-img { max-width: 100%; height: auto; border-radius: 10px; margin: 10px 0; display: block; margin-left: auto; margin-right: auto; border: 1px solid #ddd; }
         
-        .dashboard-container { overflow-x: auto; margin-top: 15px; }
-        table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 900px; }
+        input { width:94%; padding:15px; margin-bottom:12px; border-radius:10px; border:2px solid #ddd; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 1000px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
         th { background: var(--primary); color: white; }
     </style>
@@ -56,11 +56,12 @@
     <div id="page-reg" class="hidden">
         <div style="text-align: left; background: #e0f2f1; padding: 20px; border-radius: 15px; border-left: 8px solid var(--primary); margin-bottom: 25px;">
             <img src="character.png" style="width: 60px; float: right;">
-            <h2 style="color: var(--primary); margin: 0;">Student Registration</h2>
-            <p style="margin: 5px 0; font-weight: bold; color: #555;">Please enter your details below 📝</p>
+            <h2 style="color: var(--primary); margin: 0;">Student Information</h2>
+            <p style="margin: 5px 0; font-weight: bold; color: #555;">Please fill up all fields 📝</p>
         </div>
-        <input type="text" id="studentName" placeholder="Full Name (Pangalan)" style="width:94%; padding:15px; margin-bottom:12px; border-radius:10px; border:2px solid #ddd; font-size: 16px;">
-        <input type="text" id="studentSchool" placeholder="School Name (Paaralan)" style="width:94%; padding:15px; margin-bottom:20px; border-radius:10px; border:2px solid #ddd; font-size: 16px;">
+        <input type="text" id="studentName" placeholder="Full Name (Pangalan)">
+        <input type="text" id="studentSchool" placeholder="School Name (Paaralan)">
+        <input type="text" id="studentSection" placeholder="Grade & Section">
         
         <button class="btn-start" onclick="startTest()">PROCEED TO EXAM ✍️</button>
         <button class="btn-back" onclick="backToWelcome()">BACK TO WELCOME PAGE</button>
@@ -96,9 +97,9 @@
             <button onclick="syncToCloud()" style="background:#2ecc71; color:white; flex: 1;">☁️ Sync Offline Data</button>
             <button onclick="downloadCSV()" style="background:#3498db; color:white; flex: 1;">📥 Download CSV</button>
         </div>
-        <div class="dashboard-container">
+        <div style="overflow-x: auto;">
             <table id="adminTable">
-                <thead><tr><th>Name</th><th>School</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th><th>Total</th><th>Date</th></tr></thead>
+                <thead><tr><th>Name</th><th>School</th><th>Section</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th><th>Total</th><th>Date</th></tr></thead>
                 <tbody id="adminTbody"></tbody>
             </table>
         </div>
@@ -120,14 +121,18 @@
         { q: "Which of the following is the net of a square pyramid?", options: ["Choice A", "Choice B", "Choice C", "Choice D"], answer: 0, img: "q7.png" },
         { q: "Formulate a rule to find the next term in the sequence: 2, 6, 18, 54, ...", options: ["Divide 3 to the term before it.", "Multiply 3 to the term before it.", "Subtract 3 to the term before it.", "Add 3 to the term before it."], answer: 1, img: null },
         { q: "What rule must be formulated to find the 6th and the succeeding terms of the sequence below? (3, 8, 13, 18, 23)", options: ["Subtract 2 from the product of 5 and n (5n – 2).", "Multiply 5 to n (5n).", "Subtract 5 from the product of 2 and n (2n – 5).", "Add 2 from the product of 5 and n (5n + 2)."], answer: 0, img: "q9.png" },
-        { q: "Study the sequence below (11, 14, 17, 20, 23). What rule will you formulate to find the 6th term of the sequence?", options: ["3n – 8", "3n + 8", "3n + 5", "3n – 5"], answer: 1, img: "q10.png" }
+        { q: "Study the sequence below (11, 14, 17, 20, 23). What rule will you formulate to find the 6th term of the sequence?", options: ["Subtract 8 from the product of 3 and n (3n - 8).", "Add 8 to the product of 3 and n (3n + 8).", "Add 5 to the product of 3 and n (3n + 5).", "Subtract 5 from the product of 3 and n (3n - 5)."], answer: 1, img: "q10.png" }
     ];
 
     let currentIdx = 0, studentAnswers = new Array(10).fill(null), timeLeft = 40 * 60, timerInterval;
 
     function showRegistration() { document.getElementById('page-start').classList.add('hidden'); document.getElementById('page-reg').classList.remove('hidden'); }
     function backToWelcome() { document.getElementById('page-reg').classList.add('hidden'); document.getElementById('page-start').classList.remove('hidden'); }
-    function startTest() { if(!document.getElementById('studentName').value) return alert("Paki-lagay ang pangalan! 🦉"); document.getElementById('page-reg').classList.add('hidden'); document.getElementById('page-quiz').classList.remove('hidden'); startTimer(); renderQuestion(); }
+    function startTest() { 
+        if(!document.getElementById('studentName').value || !document.getElementById('studentSchool').value || !document.getElementById('studentSection').value) 
+            return alert("Paki-fill up lahat ng fields (Name, School, Section)! 🦉"); 
+        document.getElementById('page-reg').classList.add('hidden'); document.getElementById('page-quiz').classList.remove('hidden'); startTimer(); renderQuestion(); 
+    }
     function startTimer() { timerInterval = setInterval(() => { timeLeft--; let m = Math.floor(timeLeft/60), s = timeLeft%60; document.getElementById('timer').innerText = `${m}:${s<10?'0':''}${s}`; if(timeLeft<=0) endTest(); }, 1000); }
     
     function renderQuestion() { 
@@ -148,7 +153,12 @@
         let score = 0, reviewHtml = "";
         const detailedAnswers = studentAnswers.map((ans, i) => ans === questions[i].answer ? "✔️" : "❌");
         detailedAnswers.forEach((sym, i) => { if(sym === "✔️") score++; reviewHtml += `<div class="review-box"><b>No. ${i+1}:</b> ${sym === "✔️" ? '✔️ Tama' : '❌ Mali'}<br>Ans: ${questions[i].options[questions[i].answer]}</div>`; });
-        const resultData = { name: document.getElementById('studentName').value, school: document.getElementById('studentSchool').value, score: `${score}/10`, dateTime: new Date().toLocaleString(), details: detailedAnswers };
+        const resultData = { 
+            name: document.getElementById('studentName').value, 
+            school: document.getElementById('studentSchool').value, 
+            section: document.getElementById('studentSection').value,
+            score: `${score}/10`, dateTime: new Date().toLocaleString(), details: detailedAnswers 
+        };
         let history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]"); history.push(resultData); localStorage.setItem('math_quiz_history', JSON.stringify(history));
         document.getElementById('final-score-text').innerText = `Your score is ${score} / 10`;
         document.getElementById('review-container').innerHTML = reviewHtml;
@@ -160,8 +170,20 @@
         } else { statusMsg.innerText = "📶 Offline: Result saved on device."; }
     }
 
-    function adminLogin() { if(prompt("Teacher PIN:") === "1234") { document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden')); document.getElementById('page-admin').classList.remove('hidden'); const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]"); document.getElementById('adminTbody').innerHTML = history.map(h => `<tr><td>${h.name}</td><td>${h.school}</td>${h.details.map(d => `<td>${d}</td>`).join('')}<td style="font-weight:bold;">${h.score}</td><td>${h.dateTime}</td></tr>`).join(''); } }
-    function downloadCSV() { const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]"); let csv = "Name,School,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Score,Date\n"; history.forEach(h => { csv += `"${h.name}","${h.school}",${h.details.join(',')},"${h.score}","${h.dateTime}"\n`; }); const blob = new Blob(["\ufeff" + csv], { type: 'text/csv' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Grade6_Math_Results.csv'; a.click(); }
+    function adminLogin() { 
+        if(prompt("Teacher PIN:") === "1234") { 
+            document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden')); document.getElementById('page-admin').classList.remove('hidden'); 
+            const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]"); 
+            document.getElementById('adminTbody').innerHTML = history.map(h => `<tr><td>${h.name}</td><td>${h.school}</td><td>${h.section}</td>${h.details.map(d => `<td>${d}</td>`).join('')}<td style="font-weight:bold;">${h.score}</td><td>${h.dateTime}</td></tr>`).join(''); 
+        } 
+    }
+    function downloadCSV() { 
+        const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]"); 
+        let csv = "Name,School,Section,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Score,Date\n"; 
+        history.forEach(h => { csv += `"${h.name}","${h.school}","${h.section}",${h.details.join(',')},"${h.score}","${h.dateTime}"\n`; }); 
+        const blob = new Blob(["\ufeff" + csv], { type: 'text/csv' }); 
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Math_Periodic_Results.csv'; a.click(); 
+    }
     async function syncToCloud() { if(!navigator.onLine) return alert("Walang internet!"); const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]"); for(let d of history) { await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) }); } alert("Synced!"); }
 </script>
 </body>
