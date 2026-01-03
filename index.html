@@ -12,22 +12,19 @@
         .container { max-width: 950px; margin: 0 auto; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; width: 100%; }
         .hidden { display: none; }
         
-        /* 🦉 WELCOME PAGE BOUNCING OWL */
         .owl-img { 
             width: 160px; height: auto; display: block; margin: 0 auto 20px; 
             animation: bounceOwl 1.2s infinite ease-in-out !important; 
         }
         @keyframes bounceOwl {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-30px); }
+            50% { transform: translateY(-25px); }
         }
 
-        /* 🦉 QUIZ PAGE MOTIVATIONAL OWL */
         .owl-motivation { display: flex; align-items: center; gap: 15px; margin-bottom: 5px; justify-content: center; }
         .owl-mini { width: 80px; height: auto; }
         .bubble { background: #fff; border: 3px solid var(--primary); padding: 12px; border-radius: 15px; flex: 1; font-weight: bold; color: #00796b; font-size: 14px; position: relative; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-        /* 🚗 CAR SLIDER */
         .car-track { width: 100%; height: 10px; background: #e0e0e0; border-radius: 10px; position: relative; margin: 25px 0 20px 0; border: 1px solid #ccc; }
         #car { position: absolute; top: -22px; left: 0; font-size: 28px; transition: 0.5s ease-in-out; }
         
@@ -119,16 +116,16 @@
     const owlMessages = ["Ready na? Game! 🦉", "Keep going! ✨", "Think carefully! 🧠", "Kaya mo yan! 💪", "Amazing! 🌟", "Just a few more! 🚀", "Math Wizard! 🧙‍♂️", "Focus! 🎯", "Almost done! 🏆", "Last one! Go! 🎉"];
     
     const questions = [
-        { q: "How will you describe a rectangular prism?", options: ["Option A", "Option B", "Option C", "Option D"], answer: 2, img: "q1.png" },
+        { q: "How will you describe a rectangular prism?", options: ["It has one face but no edges or vertices.", "It has two circular faces but has no edges or vertices.", "It has three pairs of congruent parallel faces.", "It has one base and at least three triangular faces."], answer: 2, img: "q1.png" },
         { q: "How will you visualize a sphere?", options: ["I and II", "II and III", "III and IV", "I and IV"], answer: 3, img: "q2.png" },
-        { q: "Solid figures vs Plane figures?", options: ["Solid 3D, Plane 2D", "Plane 3D, Solid 2D", "Solid has H, Plane none", "Plane has H, Solid none"], answer: 0, img: null },
-        { q: "Correct pair?", options: ["Sphere/Cone=Solid, Circle/Square=Plane", "Circle/Square=Solid", "Solid=Length only", "Plane=Width only"], answer: 0, img: null },
-        { q: "Rule for: 86, 81, 76, 71, 66?", options: ["Subtract 5", "Add 5", "Multiply 5", "Divide 5"], answer: 0, img: null },
-        { q: "Faces of rectangular prism?", options: ["Choice A", "Choice B", "Choice C", "Choice D"], answer: 1, img: "q6.png" },
-        { q: "Net of square pyramid?", options: ["Choice A", "Choice B", "Choice C", "Choice D"], answer: 0, img: "q7.png" },
-        { q: "Rule for: 2, 6, 18, 54?", options: ["Divide 3", "Multiply 3", "Subtract 3", "Add 3"], answer: 1, img: null },
-        { q: "Rule for: 3, 8, 13, 18, 23?", options: ["5n-2", "5n", "2n-5", "5n+2"], answer: 0, img: "q9.png" },
-        { q: "Rule for: 11, 14, 17, 20, 23?", options: ["3n-8", "3n+8", "3n+5", "3n-5"], answer: 1, img: "q10.png" }
+        { q: "How will you differentiate solid figures from plane figures?", options: ["Solid figures have three dimensions while plane figures have two dimensions.", "Plane figures have three dimensions while solid figures have two dimensions.", "Solid figures have dimensions: width, length and height while plane figures have width and length.", "Plane figures have width, length and height while solid figures have width and length."], answer: 2, img: null },
+        { q: "You will differentiate solid figures from plane figures by giving examples of each. Which of the following is correct?", options: ["Sphere, Cone, and Pyramid are solid figures while Circle, Triangle and Square are plane figures.", "Circle, Triangle and Square are solid figures while Sphere, Cone, and Pyramid are plane figures.", "Solid figures have only length and width while plane figures have height and depth.", "Plane figures have width, length and height while solid figures have width and length."], answer: 0, img: null },
+        { q: "What rule should be formulated to find the next term in the sequence: 86, 81, 76, 71, 66?", options: ["Subtract 5 from the term before it.", "Add 5 from the term before it.", "Subtract 5 from the term after it.", "Add 5 from the term after it."], answer: 0, img: null },
+        { q: "Which of the following are the faces of a rectangular prism from the given nets?", options: ["Choice A", "Choice B", "Choice C", "Choice D"], answer: 1, img: "q6.png" },
+        { q: "Which of the following is the net of a square pyramid?", options: ["Choice A", "Choice B", "Choice C", "Choice D"], answer: 0, img: "q7.png" },
+        { q: "Formulate a rule to find the next term in the sequence: 2, 6, 18, 54, ...", options: ["Divide 3 to the term before it.", "Multiply 3 to the term before it.", "Subtract 3 to the term before it.", "Add 3 to the term before it."], answer: 1, img: null },
+        { q: "What rule must be formulated to find the 6th and the succeeding terms of the sequence below? (3, 8, 13, 18, 23)", options: ["Subtract 2 from the product of 5 and n (5n – 2).", "Multiply 5 to n (5n).", "Subtract 5 from the product of 2 and n (2n – 5).", "Add 2 from the product of 5 and n (5n + 2)."], answer: 0, img: "q9.png" },
+        { q: "Study the sequence below (11, 14, 17, 20, 23). What rule will you formulate to find the 6th term of the sequence?", options: ["3n – 8", "3n + 8", "3n + 5", "3n – 5"], answer: 1, img: "q10.png" }
     ];
 
     let currentIdx = 0, studentAnswers = new Array(10).fill(null), timeLeft = 40 * 60, timerInterval;
@@ -174,7 +171,6 @@
         document.getElementById('final-score-text').innerText = `Score: ${score} / 10`;
         document.getElementById('page-quiz').classList.add('hidden'); document.getElementById('page-results').classList.remove('hidden');
 
-        // ☁️ AUTO-SYNC LOGIC
         const statusMsg = document.getElementById('sync-status-msg');
         if (navigator.onLine) {
             statusMsg.innerText = "☁️ Automatically syncing to Teacher's Record...";
