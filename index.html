@@ -12,14 +12,16 @@
         .container { max-width: 950px; margin: 0 auto; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; width: 100%; }
         .hidden { display: none; }
         
-        /* 🦉 BOUNCING OWL ANIMATION */
+        /* 🦉 PINALAKAS NA BOUNCING ANIMATION */
         .owl-img { 
             width: 160px; height: auto; display: block; margin: 0 auto 20px; 
-            animation: bounce 2s infinite ease-in-out; 
+            animation: bounceOwl 1.5s infinite ease-in-out !important; 
+            position: relative;
+            z-index: 10;
         }
-        @keyframes bounce {
+        @keyframes bounceOwl {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-25px); }
         }
 
         .bubble { background: #fff; border: 4px solid var(--primary); padding: 20px; border-radius: 20px; font-weight: bold; color: #00796b; font-size: 18px; margin-bottom: 30px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
@@ -32,7 +34,6 @@
         .option.selected { background: var(--primary); color: white; font-weight: bold; }
         .q-img { max-width: 100%; height: auto; border-radius: 10px; margin: 10px 0; display: block; margin-left: auto; margin-right: auto; border: 1px solid #ddd; }
         
-        /* Dashboard Styles */
         .dashboard-container { overflow-x: auto; margin-top: 15px; }
         table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 900px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
@@ -46,7 +47,7 @@
 
     <div id="page-start" style="text-align: center;">
         <img src="character.png" class="owl-img">
-        <div class="bubble">Hello, Grade 6 Student! 🎓<br>I am your Math Buddy. Are you ready for some Math fun?</div>
+        <div class="bubble">Hello, Grade 6 Student! 🎓<br>I am in motion! Are you ready for Math?</div>
         <button class="btn-start" onclick="showRegistration()">YES, I AM READY! 🚀</button>
     </div>
 
@@ -54,10 +55,10 @@
         <div style="text-align: left; background: #e0f2f1; padding: 20px; border-radius: 15px; border-left: 8px solid var(--primary); margin-bottom: 25px;">
             <img src="character.png" style="width: 60px; float: right;">
             <h2 style="color: var(--primary); margin: 0;">Mathematics - Grade 6</h2>
-            <p style="margin: 5px 0; font-weight: bold; color: #555;">Smart Sync Enabled (Online & Offline) ☁️</p>
+            <p style="margin: 5px 0; font-weight: bold; color: #555;">Real-time Auto-Sync Enabled ⚡</p>
         </div>
-        <input type="text" id="studentName" placeholder="Full Name (Pangalan)" style="width:94%; padding:15px; margin-bottom:12px; border-radius:10px; border:2px solid #ddd; font-size: 16px;">
-        <input type="text" id="studentSchool" placeholder="School Name (Paaralan)" style="width:94%; padding:15px; margin-bottom:20px; border-radius:10px; border:2px solid #ddd; font-size: 16px;">
+        <input type="text" id="studentName" placeholder="Pangalan (Full Name)" style="width:94%; padding:15px; margin-bottom:12px; border-radius:10px; border:2px solid #ddd; font-size: 16px;">
+        <input type="text" id="studentSchool" placeholder="Paaralan (School)" style="width:94%; padding:15px; margin-bottom:20px; border-radius:10px; border:2px solid #ddd; font-size: 16px;">
         <button class="btn-start" onclick="startTest()">PROCEED TO EXAM ✍️</button>
     </div>
 
@@ -81,7 +82,7 @@
     <div id="page-results" class="hidden" style="text-align: center;">
         <img src="character.png" class="owl-img">
         <h2 id="final-score-text"></h2>
-        <p id="sync-status" style="color: var(--primary); font-weight: bold;"></p>
+        <div id="sync-indicator" style="padding: 10px; border-radius: 10px; margin-bottom: 10px; font-weight: bold;"></div>
         <div id="review-container" style="max-height: 250px; overflow-y: auto; margin: 20px 0; border: 1px solid #eee; padding: 15px; border-radius: 15px;"></div>
         <button class="btn-start" onclick="location.reload()">FINISH & CLOSE ✅</button>
     </div>
@@ -121,7 +122,7 @@
     let currentIdx = 0, studentAnswers = new Array(questions.length).fill(null), timeLeft = 40 * 60, timerInterval;
 
     function showRegistration() { document.getElementById('page-start').classList.add('hidden'); document.getElementById('page-reg').classList.remove('hidden'); }
-    function startTest() { if(!document.getElementById('studentName').value || !document.getElementById('studentSchool').value) return alert("Huwag kalimutang ilagay ang pangalan at school! 🦉"); document.getElementById('page-reg').classList.add('hidden'); document.getElementById('page-quiz').classList.remove('hidden'); startTimer(); renderQuestion(); }
+    function startTest() { if(!document.getElementById('studentName').value) return alert("Huwag kalimutan ang pangalan! 🦉"); document.getElementById('page-reg').classList.add('hidden'); document.getElementById('page-quiz').classList.remove('hidden'); startTimer(); renderQuestion(); }
     function startTimer() { timerInterval = setInterval(() => { timeLeft--; let m = Math.floor(timeLeft/60), s = timeLeft%60; document.getElementById('timer').innerText = `${m}:${s<10?'0':''}${s}`; if(timeLeft<=0) endTest(); }, 1000); }
     
     function renderQuestion() { 
@@ -143,7 +144,7 @@
     function nextQuestion() { 
         if (studentAnswers[currentIdx] === null) return alert("Pumili ka muna ng sagot! 🦉"); 
         if (currentIdx < questions.length - 1) { currentIdx++; renderQuestion(); } 
-        else { if(confirm("Submit test?")) endTest(); } 
+        else { if(confirm("Submit?")) endTest(); } 
     }
     function prevQuestion() { if(currentIdx > 0) { currentIdx--; renderQuestion(); } }
 
@@ -159,19 +160,34 @@
         history.push(resultData);
         localStorage.setItem('math_quiz_history', JSON.stringify(history));
 
-        document.getElementById('final-score-text').innerText = `Your score is ${score} / 10`;
+        document.getElementById('final-score-text').innerText = `Ang iyong score ay ${score} / 10`;
         document.getElementById('review-container').innerHTML = reviewHtml;
         document.getElementById('page-quiz').classList.add('hidden');
         document.getElementById('page-results').classList.remove('hidden');
 
-        // AUTOMATIC SYNC
+        // ⚡ AUTOMATIC SYNC LOGIC
+        const indicator = document.getElementById('sync-indicator');
         if (navigator.onLine) {
-            document.getElementById('sync-status').innerText = "☁️ Automatically syncing to Teacher's record...";
+            indicator.style.background = "#e0f2f1";
+            indicator.style.color = "#00796b";
+            indicator.innerText = "☁️ Online: Automatically syncing to Google Sheets...";
+            
             try {
-                await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(resultData) });
-                document.getElementById('sync-status').innerText = "✅ Synced to Google Sheets!";
-            } catch (e) { document.getElementById('sync-status').innerText = "⚠️ Online but Sync failed."; }
-        } else { document.getElementById('sync-status').innerText = "📶 Offline: Saved to device. Teacher will sync later."; }
+                const response = await fetch(CLOUD_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(resultData),
+                    keepalive: true // Itutuloy kahit i-close ang tab
+                });
+                indicator.innerText = "✅ Success: Result recorded in Teacher's Sheet!";
+            } catch (e) {
+                indicator.innerText = "⚠️ Signal lost: Result saved on device only.";
+            }
+        } else {
+            indicator.style.background = "#fff3e0";
+            indicator.style.color = "#ef6c00";
+            indicator.innerText = "📶 Offline: Saved to device. Teacher will sync this later.";
+        }
     }
 
     function adminLogin() {
@@ -184,19 +200,19 @@
 
     function downloadCSV() {
         const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        if(history.length === 0) return alert("No data.");
+        if(history.length === 0) return alert("Walang data.");
         let csv = "Name,School,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Score,Date\n";
         history.forEach(h => { csv += `"${h.name}","${h.school}",${h.details.join(',')},"${h.score}","${h.dateTime}"\n`; });
         const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a'); a.setAttribute('href', url); a.setAttribute('download', 'Class_Results.csv'); a.click();
+        const a = document.createElement('a'); a.href = window.URL.createObjectURL(blob); a.download = 'Grade6_Results.csv'; a.click();
     }
 
     async function syncToCloud() {
         const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        if(!navigator.onLine) return alert("Kailangan mo ng internet!");
+        if(!navigator.onLine) return alert("Kailangan ng internet!");
+        alert("Syncing all offline data... Please wait.");
         for(let d of history) { await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) }); }
-        alert("Success! Lahat ng data ay nasa Google Sheets na. ☁️");
+        alert("Lahat ng data ay na-sync na! ☁️");
     }
 
     if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js'); }); }
