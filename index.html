@@ -12,44 +12,27 @@
         .container { max-width: 950px; margin: 0 auto; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; width: 100%; }
         .hidden { display: none; }
         
-        /* GUMAGALAW NA TEACHER OWL */
+        /* 🦉 BOUNCING OWL ANIMATION */
         .owl-img { 
-            width: 160px; 
-            height: auto; 
-            display: block; 
-            margin: 0 auto 20px; 
-            animation: float 3s ease-in-out infinite; /* Eto ang nagpapagalaw sa kanya */
+            width: 160px; height: auto; display: block; margin: 0 auto 20px; 
+            animation: bounce 2s infinite ease-in-out; 
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-
-        .bubble { 
-            background: #fff; 
-            border: 4px solid var(--primary); 
-            padding: 20px; 
-            border-radius: 20px; 
-            font-weight: bold; 
-            color: #00796b; 
-            font-size: 18px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-
-        /* PROGRESS CAR & TRACK */
+        .bubble { background: #fff; border: 4px solid var(--primary); padding: 20px; border-radius: 20px; font-weight: bold; color: #00796b; font-size: 18px; margin-bottom: 30px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .car-track { width: 100%; height: 10px; background: #e0e0e0; border-radius: 10px; position: relative; margin: 30px 0; border: 1px solid #ccc; }
         #car { position: absolute; top: -25px; left: 0; font-size: 28px; transition: 0.5s ease-in-out; }
-
-        /* BUTTONS */
-        button { padding: 18px 35px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 18px; transition: 0.3s transform; }
-        button:active { transform: scale(0.95); }
-        .btn-start { background: var(--secondary); color: white; width: 100%; box-shadow: 0 8px 0 #d32f2f; margin-bottom: 10px; }
-        .btn-start:hover { background: #f4511e; }
         
-        /* DASHBOARD TABLE */
+        button { padding: 18px 35px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 18px; transition: 0.3s transform; }
+        .btn-start { background: var(--secondary); color: white; width: 100%; box-shadow: 0 6px 0 #d32f2f; margin-bottom: 10px; }
+        .option { display: block; background: #fff; border: 2px solid #b2dfdb; padding: 12px; margin: 8px 0; border-radius: 10px; cursor: pointer; text-align: left; }
+        .option.selected { background: var(--primary); color: white; font-weight: bold; }
+        .q-img { max-width: 100%; height: auto; border-radius: 10px; margin: 10px 0; display: block; margin-left: auto; margin-right: auto; border: 1px solid #ddd; }
+        
+        /* Dashboard Styles */
         .dashboard-container { overflow-x: auto; margin-top: 15px; }
         table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 900px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
@@ -59,14 +42,11 @@
 <body>
 
 <div class="container">
-    <div style="position: absolute; top: 15px; right: 20px; opacity: 0.5; font-size: 12px; cursor: pointer;" onclick="adminLogin()">Teacher Access 🔒</div>
+    <div style="position: absolute; top: 15px; right: 20px; opacity: 0.4; font-size: 12px; cursor: pointer; font-weight: bold;" onclick="adminLogin()">Teacher Access 🔒</div>
 
     <div id="page-start" style="text-align: center;">
         <img src="character.png" class="owl-img">
-        <div class="bubble">
-            Hello, Grade 6 Student! 🎓<br>
-            I am your Math Buddy. Are you ready for some Math fun?
-        </div>
+        <div class="bubble">Hello, Grade 6 Student! 🎓<br>I am your Math Buddy. Are you ready for some Math fun?</div>
         <button class="btn-start" onclick="showRegistration()">YES, I AM READY! 🚀</button>
     </div>
 
@@ -74,10 +54,10 @@
         <div style="text-align: left; background: #e0f2f1; padding: 20px; border-radius: 15px; border-left: 8px solid var(--primary); margin-bottom: 25px;">
             <img src="character.png" style="width: 60px; float: right;">
             <h2 style="color: var(--primary); margin: 0;">Mathematics - Grade 6</h2>
-            <p style="margin: 5px 0; font-weight: bold; color: #555;">Teacher's Assessment Tool</p>
+            <p style="margin: 5px 0; font-weight: bold; color: #555;">Smart Sync Enabled (Online & Offline) ☁️</p>
         </div>
-        <input type="text" id="studentName" placeholder="Full Name (Pangalan)" style="width:94%; padding:15px; margin-bottom:12px; border-radius:10px; border:2px solid #ddd; font-size:16px;">
-        <input type="text" id="studentSchool" placeholder="School Name (Paaralan)" style="width:94%; padding:15px; margin-bottom:20px; border-radius:10px; border:2px solid #ddd; font-size:16px;">
+        <input type="text" id="studentName" placeholder="Full Name (Pangalan)" style="width:94%; padding:15px; margin-bottom:12px; border-radius:10px; border:2px solid #ddd; font-size: 16px;">
+        <input type="text" id="studentSchool" placeholder="School Name (Paaralan)" style="width:94%; padding:15px; margin-bottom:20px; border-radius:10px; border:2px solid #ddd; font-size: 16px;">
         <button class="btn-start" onclick="startTest()">PROCEED TO EXAM ✍️</button>
     </div>
 
@@ -85,10 +65,6 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
             <div id="timer" style="font-size: 24px; font-weight: bold; color: #d32f2f;">40:00</div>
             <img src="character.png" style="width: 45px;">
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-             <img src="character.png" style="width: 70px;">
-             <div class="bubble" id="owl-message" style="padding: 10px; font-size: 14px; margin-bottom: 0;">Let's do this!</div>
         </div>
         <div class="car-track"><div id="car">🚗</div></div>
         <div id="quiz-content" style="text-align: left;">
@@ -105,6 +81,7 @@
     <div id="page-results" class="hidden" style="text-align: center;">
         <img src="character.png" class="owl-img">
         <h2 id="final-score-text"></h2>
+        <p id="sync-status" style="color: var(--primary); font-weight: bold;"></p>
         <div id="review-container" style="max-height: 250px; overflow-y: auto; margin: 20px 0; border: 1px solid #eee; padding: 15px; border-radius: 15px;"></div>
         <button class="btn-start" onclick="location.reload()">FINISH & CLOSE ✅</button>
     </div>
@@ -112,26 +89,22 @@
     <div id="page-admin" class="hidden">
         <h2 style="color: var(--secondary); text-align: center;">Teacher Dashboard</h2>
         <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-            <button onclick="syncToCloud()" style="background:#2ecc71; color:white; flex: 1;">☁️ Sync to Google Sheets</button>
+            <button onclick="syncToCloud()" style="background:#2ecc71; color:white; flex: 1;">☁️ Sync Offline Data</button>
             <button onclick="downloadCSV()" style="background:#3498db; color:white; flex: 1;">📥 Download CSV</button>
         </div>
         <div class="dashboard-container">
             <table id="adminTable">
-                <thead>
-                    <tr><th>Name</th><th>School</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th><th>Total</th><th>Date</th></tr>
-                </thead>
+                <thead><tr><th>Name</th><th>School</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th><th>Total</th><th>Date</th></tr></thead>
                 <tbody id="adminTbody"></tbody>
             </table>
         </div>
-        <button onclick="location.reload()" style="margin-top:20px; background:#ddd; width: 100%;">Back</button>
+        <button onclick="location.reload()" style="margin-top:20px; background:#ddd; width: 100%;">Back to Start</button>
     </div>
 </div>
 
 <script>
-    // SIGURADUHIN NA TAMA ANG IYONG URL DITO
     const CLOUD_URL = "https://script.google.com/macros/s/AKfycbz2LX70TXDsjd_r7spB8fGvlMQ8fthtJ3WnUSzvf1IJpJDY0bGyekkJJ1UKJi7fIDsv/exec"; 
 
-    const owlMessages = ["Ready na? Game! 🦉", "Ang galing! Ituloy lang. ✨", "Pag-isipan mabuti, ha? 🧠", "Kalahati na! Kaya mo 'yan! 💪", "Ang talino mo talaga! 🌟", "Kaunti na lang! 🚀", "Math Wizard ka na! 🧙‍♂️", "Focus lang tayo. 🎯", "Malapit na matapos! 🏆", "Last one! Go! 🎉"];
     const questions = [
         { q: "How will you describe a rectangular prism?", options: ["It has one face but no edges or vertices.", "It has two circular faces but has no edges or vertices.", "It has three pairs of congruent parallel faces.", "It has one base and at least three triangular faces."], answer: 2, img: "q1.png" },
         { q: "How will you visualize a sphere?", options: ["I and II", "II and III", "III and IV", "I and IV"], answer: 3, img: "q2.png" },
@@ -150,21 +123,55 @@
     function showRegistration() { document.getElementById('page-start').classList.add('hidden'); document.getElementById('page-reg').classList.remove('hidden'); }
     function startTest() { if(!document.getElementById('studentName').value || !document.getElementById('studentSchool').value) return alert("Huwag kalimutang ilagay ang pangalan at school! 🦉"); document.getElementById('page-reg').classList.add('hidden'); document.getElementById('page-quiz').classList.remove('hidden'); startTimer(); renderQuestion(); }
     function startTimer() { timerInterval = setInterval(() => { timeLeft--; let m = Math.floor(timeLeft/60), s = timeLeft%60; document.getElementById('timer').innerText = `${m}:${s<10?'0':''}${s}`; if(timeLeft<=0) endTest(); }, 1000); }
-    function renderQuestion() { const q = questions[currentIdx]; document.getElementById('q-title').innerText = `${currentIdx + 1}. ${q.q}`; document.getElementById('owl-message').innerText = owlMessages[currentIdx]; document.getElementById('q-image-container').innerHTML = q.img ? `<img src="${q.img}" class="q-img">` : ""; const optCont = document.getElementById('options-container'); optCont.innerHTML = ""; q.options.forEach((opt, i) => { const div = document.createElement('div'); div.className = `option ${studentAnswers[currentIdx] === i ? 'selected' : ''}`; div.innerText = `${String.fromCharCode(65+i)}. ${opt}`; div.onclick = () => { studentAnswers[currentIdx] = i; renderQuestion(); }; optCont.appendChild(div); }); document.getElementById('car').style.left = `${(currentIdx / (questions.length - 1)) * 95}%`; document.getElementById('btnBack').style.visibility = currentIdx === 0 ? 'hidden' : 'visible'; }
-    function nextQuestion() { if (studentAnswers[currentIdx] === null) return alert("Pumili ka muna ng sagot! 🦉"); if (currentIdx < questions.length - 1) { currentIdx++; renderQuestion(); } else { if(confirm("Handa ka na bang i-submit ang iyong test?")) endTest(); } }
+    
+    function renderQuestion() { 
+        const q = questions[currentIdx]; 
+        document.getElementById('q-title').innerText = `${currentIdx + 1}. ${q.q}`; 
+        document.getElementById('q-image-container').innerHTML = q.img ? `<img src="${q.img}" class="q-img">` : "";
+        const optCont = document.getElementById('options-container'); optCont.innerHTML = "";
+        q.options.forEach((opt, i) => {
+            const div = document.createElement('div');
+            div.className = `option ${studentAnswers[currentIdx] === i ? 'selected' : ''}`;
+            div.innerText = `${String.fromCharCode(65+i)}. ${opt}`;
+            div.onclick = () => { studentAnswers[currentIdx] = i; renderQuestion(); };
+            optCont.appendChild(div);
+        });
+        document.getElementById('car').style.left = `${(currentIdx / (questions.length - 1)) * 95}%`;
+        document.getElementById('btnBack').style.visibility = currentIdx === 0 ? 'hidden' : 'visible';
+    }
+
+    function nextQuestion() { 
+        if (studentAnswers[currentIdx] === null) return alert("Pumili ka muna ng sagot! 🦉"); 
+        if (currentIdx < questions.length - 1) { currentIdx++; renderQuestion(); } 
+        else { if(confirm("Submit test?")) endTest(); } 
+    }
     function prevQuestion() { if(currentIdx > 0) { currentIdx--; renderQuestion(); } }
 
-    function endTest() {
+    async function endTest() {
         clearInterval(timerInterval);
         let score = 0, reviewHtml = "";
         const detailedAnswers = studentAnswers.map((ans, i) => ans === questions[i].answer ? "✔️" : "❌");
         detailedAnswers.forEach((sym, i) => { if(sym === "✔️") score++; reviewHtml += `<div class="review-box"><b>No. ${i+1}:</b> ${sym === "✔️" ? '✔️ Tama' : '❌ Mali'}<br>Ans: ${questions[i].options[questions[i].answer]}</div>`; });
+        
+        const resultData = { name: document.getElementById('studentName').value, school: document.getElementById('studentSchool').value, score: `${score}/10`, dateTime: new Date().toLocaleString(), details: detailedAnswers };
+        
         let history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        history.push({ name: document.getElementById('studentName').value, school: document.getElementById('studentSchool').value, score: `${score}/10`, dateTime: new Date().toLocaleString(), details: detailedAnswers });
+        history.push(resultData);
         localStorage.setItem('math_quiz_history', JSON.stringify(history));
-        document.getElementById('final-score-text').innerText = `Ang score mo ay ${score} / 10`;
+
+        document.getElementById('final-score-text').innerText = `Your score is ${score} / 10`;
         document.getElementById('review-container').innerHTML = reviewHtml;
-        document.getElementById('page-quiz').classList.add('hidden'); document.getElementById('page-results').classList.remove('hidden');
+        document.getElementById('page-quiz').classList.add('hidden');
+        document.getElementById('page-results').classList.remove('hidden');
+
+        // AUTOMATIC SYNC
+        if (navigator.onLine) {
+            document.getElementById('sync-status').innerText = "☁️ Automatically syncing to Teacher's record...";
+            try {
+                await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(resultData) });
+                document.getElementById('sync-status').innerText = "✅ Synced to Google Sheets!";
+            } catch (e) { document.getElementById('sync-status').innerText = "⚠️ Online but Sync failed."; }
+        } else { document.getElementById('sync-status').innerText = "📶 Offline: Saved to device. Teacher will sync later."; }
     }
 
     function adminLogin() {
@@ -177,20 +184,19 @@
 
     function downloadCSV() {
         const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        if(history.length === 0) return alert("Walang data.");
+        if(history.length === 0) return alert("No data.");
         let csv = "Name,School,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Score,Date\n";
         history.forEach(h => { csv += `"${h.name}","${h.school}",${h.details.join(',')},"${h.score}","${h.dateTime}"\n`; });
         const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a'); a.setAttribute('hidden', ''); a.setAttribute('href', url); a.setAttribute('download', 'Class_Results.csv');
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        const a = document.createElement('a'); a.setAttribute('href', url); a.setAttribute('download', 'Class_Results.csv'); a.click();
     }
 
     async function syncToCloud() {
         const history = JSON.parse(localStorage.getItem('math_quiz_history') || "[]");
-        if(history.length === 0) return alert("Walang data.");
+        if(!navigator.onLine) return alert("Kailangan mo ng internet!");
         for(let d of history) { await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) }); }
-        alert("Synced na sa Google Sheets! ☁️");
+        alert("Success! Lahat ng data ay nasa Google Sheets na. ☁️");
     }
 
     if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js'); }); }
